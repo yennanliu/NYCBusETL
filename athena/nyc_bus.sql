@@ -23,7 +23,4 @@ OUTPUTFORMAT
   'org.apache.hadoop.hive.ql.io.HiveIgnoreKeyTextOutputFormat'
 LOCATION
   's3://db-task-02/NYCBus'
-TBLPROPERTIES (
-  'compressionType'='gzip', 
-  'has_encrypted_data'='false', 
-  'transient_lastDdlTime'='1587375496')
+TBLPROPERTIES ('has_encrypted_data'='false')
