@@ -1,0 +1,29 @@
+CREATE EXTERNAL TABLE `nyc_bus`(
+  `recordedattime` string, 
+  `directionref` string, 
+  `publishedlinename` string, 
+  `originname` string, 
+  `originlat` string, 
+  `originlong` string, 
+  `destinationname` string, 
+  `destinationlat` string, 
+  `destinationlong` string, 
+  `vehicleref` string, 
+  `vehiclelocation.longitude` string, 
+  `nextstoppointname` string, 
+  `arrivalproximitytext` string, 
+  `distancefromstop` string, 
+  `expectedarrivaltime` string, 
+  `scheduledarrivaltime` string)
+ROW FORMAT DELIMITED 
+  FIELDS TERMINATED BY ',' 
+STORED AS INPUTFORMAT 
+  'org.apache.hadoop.mapred.TextInputFormat' 
+OUTPUTFORMAT 
+  'org.apache.hadoop.hive.ql.io.HiveIgnoreKeyTextOutputFormat'
+LOCATION
+  's3://db-task-02/NYCBus'
+TBLPROPERTIES (
+  'compressionType'='gzip', 
+  'has_encrypted_data'='false', 
+  'transient_lastDdlTime'='1587375496')
