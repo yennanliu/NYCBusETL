@@ -18,7 +18,7 @@ object TransformRecordByBusLine {
 
     def main(args: Array[String]){ 
 
-      //val sc = new SparkContext("local[*]", "SaveMaterializedviewToHive")   
+      val sc = new SparkContext("local[*]", "SaveMaterializedviewToHive")   
       val sqlContext = new org.apache.spark.sql.SQLContext(sc)
       val spark = SparkSession
         .builder
