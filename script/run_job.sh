@@ -1,5 +1,6 @@
 aws emr create-cluster \
-	 --name "MyclusterXX" \
+     --name "MyclusterXX" \
+     --instance-count 3 \
      --release-label emr-5.9.0 \
      --instance-type m4.large \
      --applications Name=Spark \
