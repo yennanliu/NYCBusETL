@@ -1,4 +1,4 @@
-CREATE EXTERNAL TABLE `nyc_bus`(
+CREATE EXTERNAL TABLE `nyc_bus_raw`(
   `recordedattime` string, 
   `directionref` string, 
   `publishedlinename` string, 
@@ -22,5 +22,5 @@ STORED AS INPUTFORMAT
 OUTPUTFORMAT 
   'org.apache.hadoop.hive.ql.io.HiveIgnoreKeyTextOutputFormat'
 LOCATION
-  's3://db-task-02/NYCBus'
+  's3://db-task-02/NYCBus/raw'
 TBLPROPERTIES ('has_encrypted_data'='false')

@@ -13,7 +13,6 @@ import java.util.Calendar
 //import org.apache.hadoop.conf.Configuration
 //import org.apache.hadoop.fs.{ FileSystem, Path }
 
-
 object LoadData { 
 
     def main(args: Array[String]){ 
@@ -31,21 +30,18 @@ object LoadData {
 
         //Destination directory
 
-        val srcDataFile = "data_sample"
-        val destDataDirRoot =  "output"
+        // val srcDataFile = "data_sample"
+        // val destDataDirRoot =  "output"
 
-        // load processed data
+        var srcDataFile = "s3://db-task-02/NYCBus"
+        val destDataDirRoot =  "s3://db-task-02/output"
 
         val bus_data = spark.read
                           .option("header","true")
                           .option("delimiter", ",")
                           .csv(srcDataFile + "/" + "*.csv")
 
-        // RDD -> spark sql table
-
         bus_data.createOrReplaceTempView("bus")
-
-        // merge spark sql table
         
         val curatedDF = spark.sql("""
              SELECT * FROM bus
