@@ -56,14 +56,22 @@ bash script/run_job.sh
 sbt clean compile
 
 sbt package 
+
+# run test job
+ spark-submit \
+ --class ETL.SparkHelloWorld \
+ target/scala-2.11/nyc_bus_etl_2.11-1.0.jar
+
 # run LoadData job 
 spark-submit \
  --class ETL.LoadData \
  target/scala-2.11/nyc_bus_etl_2.11-1.0.jar
 
- spark-submit \
- --class ETL.SparkHelloWorld \
+# run TransformRecordByBusLine job 
+spark-submit \
+ --class ETL.TransformRecordByBusLine \
  target/scala-2.11/nyc_bus_etl_2.11-1.0.jar
+
 
 ```
 
