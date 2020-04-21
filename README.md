@@ -1,10 +1,9 @@
 # NYCBusETL
 > Process NYC bus open data via Spark running on AWS EMR
 - Steps:
-    - Load data
-    - Transform data
-    - Save data
-- Techs : Spark, EMR, Athena, Scala
+    - [Load data](https://github.com/yennanliu/NYCBusETL/blob/master/src/main/scala/ETL/LoadData.scala)
+    - [Transform & Save data](https://github.com/yennanliu/NYCBusETL/blob/master/src/main/scala/ETL/TransformRecordByBusLine.scala)
+- Techs : Spark, EMR, Athena, Scala, Hive
 - ETL : [etl_script](https://github.com/yennanliu/NYCBusETL/tree/master/src/main/scala/ETL)
 - Data : [S3_data](https://console.aws.amazon.com/s3/buckets/db-task-02/NYCBus/?region=ap-southeast-2&tab=overview)
 
