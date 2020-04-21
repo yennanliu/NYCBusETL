@@ -9,13 +9,12 @@
 
 ## Architecture
 ```
-S3 -> EMR -> S3, Athena  -> RDS (mysql/postgre..)
-
+S3 -> EMR -> S3, Athena  -> RDS (mysql/postgre..) -> BI/reporting
 ```
-- Use S3 as `data lake`, storage all raw data
-- Use EMR as computing cluster, process/clean/load staging data from/back to S3
-- Use Athena as quick data access tool,create table/view on all steps data
-- Use RDS as DB save final master data (final schema) for reporting, downstream data tasks
+- S3 as `data lake`, storage all raw data
+- EMR as computing cluster, process/clean/load staging data from/back to S3
+- Athena as quick data access tool,create table/view on all steps data
+- RDS as DB save final master data (final schema) for reporting, downstream data tasks
 - TODO : Use `airflow` as job scheduling, trigger period spark job (running on EMR)
 - TODO : Use `AWS Lambda` as job API, to trigger period spark by
 HTTP request 
