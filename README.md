@@ -21,6 +21,9 @@ HTTP request
 
 ## QUICK START (EMR)
 ```bash
+# sync jar to s3
+aws s3 sync target/ s3://db-task-02/target
+
 # create emr cluster
 aws emr create-cluster \
     --name "MyClusterX" \
@@ -57,3 +60,6 @@ spark-submit \
  target/scala-2.11/nyc_bus_etl_2.11-1.0.jar
 
 ```
+
+## Ref
+- https://medium.com/big-data-on-amazon-elastic-mapreduce/run-a-spark-job-within-amazon-emr-in-15-minutes-68b02af1ae16
