@@ -59,7 +59,7 @@ object LoadData {
 
       curatedDF.show()
 
-      val curatedDF_ = curatedDF.withColumn("_recorded_year", $"recorded_year").withColumn("_recorded_month", $"recorded_month")
+      val curatedDF_ = curatedDF.withColumn("_recorded_year", $"recorded_year").withColumn("_recorded_month", $"recorded_month").withColumn("_recorded_day", $"recorded_day")
       //val curatedDF_  = curatedDF
 
       //Save as csv, partition by year and month
@@ -69,7 +69,7 @@ object LoadData {
           .format("csv")
           .mode("append")
           .option("header","true")
-          .partitionBy("_recorded_year","_recorded_month")
+          .partitionBy("_recorded_year","_recorded_month", "_recorded_day")
           .save(destDataDirRoot)   
 
   }

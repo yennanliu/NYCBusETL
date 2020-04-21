@@ -1,0 +1,1 @@
+aws s3 cp s3://db-task-02/NYCBus/raw s3://db-task-02/NYCBus/backup --recursive 
