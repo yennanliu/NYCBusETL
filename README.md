@@ -7,6 +7,19 @@
 - ETL : [etl_script](https://github.com/yennanliu/NYCBusETL/tree/master/src/main/scala/ETL)
 - Data : [S3_data](https://console.aws.amazon.com/s3/buckets/db-task-02/NYCBus/?region=ap-southeast-2&tab=overview)
 
+## Architecture
+```
+S3 -> EMR -> S3, Athena  -> RDS (mysql/postgre..)
+
+```
+- Use S3 as `data lake`, storage all raw data
+- Use EMR as computing cluster, process/clean/load staging data from/back to S3
+- Use Athena as quick data access tool,create table/view on all steps data
+- Use RDS as DB save final master data (final schema) for reporting, downstream data tasks
+- TODO : Use `airflow` as job scheduling, trigger period spark job (running on EMR)
+- TODO : Use `AWS Lambda` as job API, to trigger period spark by
+HTTP request 
+
 ## QUICK START (EMR)
 ```bash
 # create emr cluster
