@@ -33,8 +33,8 @@ object LoadData {
         // val srcDataFile = "data_sample"
         // val destDataDirRoot =  "output"
 
-        var srcDataFile = "s3://db-task-02/NYCBus"
-        val destDataDirRoot =  "s3://db-task-02/output"
+        var srcDataFile = "s3://db-task-02/NYCBus/raw"
+        val destDataDirRoot =  "s3://db-task-02/NYCBus/staging"
 
         val bus_data = spark.read
                           .option("header","true")
@@ -44,15 +44,23 @@ object LoadData {
         bus_data.createOrReplaceTempView("bus")
         
         val curatedDF = spark.sql("""
-             SELECT * FROM bus
+             SELECT 
+              year(RecordedAtTime) AS recorded_year,
+              month(RecordedAtTime) AS recorded_month,
+              day(RecordedAtTime) AS recorded_day,
+              hour(RecordedAtTime) AS recorded_hour,
+              minute(RecordedAtTime) AS recorded_minute,
+              second(RecordedAtTime) AS recorded_second,
+              date(RecordedAtTime) AS recorded_date,
+              *
+              FROM 
+              bus
               """)
 
       curatedDF.show()
 
-      // make duplicated columns : pickup_year, pickup_month, for preventing these columns been dropped out when "partitionby"
-      //val curatedDF_ = curatedDF.withColumn("_pickup_year", $"pickup_year").withColumn("_pickup_month", $"pickup_month")
-
-      val curatedDF_  = curatedDF
+      val curatedDF_ = curatedDF.withColumn("_recorded_year", $"recorded_year").withColumn("_recorded_month", $"recorded_month")
+      //val curatedDF_  = curatedDF
 
       //Save as csv, partition by year and month
       curatedDF_
@@ -61,6 +69,7 @@ object LoadData {
           .format("csv")
           .mode("append")
           .option("header","true")
+          .partitionBy("_recorded_year","_recorded_month")
           .save(destDataDirRoot)   
 
   }
