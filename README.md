@@ -72,6 +72,22 @@ spark-submit \
  --class ETL.TransformRecordByBusLine \
  target/scala-2.11/nyc_bus_etl_2.11-1.0.jar
 
+```
+
+### Quick start (deploy to EMR)
+```bash
+
+aws emr add-steps
+    --cluster-id <your_cluster_id>
+    --steps Type=spark,
+    Name=SparkImport,Args=[
+        --deploy-mode,cluster,
+        --master,yarn,
+        --conf,spark.yarn.submit.waitAppCompletion=false,
+        --jars,s3:/<your_s3_jar_bucket>.jar,
+        --driver-class-path,s3:/<your_sbt_assembly_bucket>.jar,
+        s3://<your_scala_script>.scala
+      ],ActionOnFailure=auto-terminate
 
 ```
 
